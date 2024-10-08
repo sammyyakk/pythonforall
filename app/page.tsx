@@ -1,101 +1,162 @@
-import Image from "next/image";
+"use client"
 
-export default function Home() {
+import { useState, useEffect } from "react"
+import { useTheme } from "next-themes"
+import dynamic from 'next/dynamic'
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { BookOpen, Code, FileCode, Layers, Moon, Sun } from "lucide-react"
+import Link from "next/link"
+
+// Dynamically import the video component with no SSR
+const DynamicVideoHero = dynamic(() => import('./VideoHero'), { ssr: false })
+
+export default function Page() {
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return null
+  }
+
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark")
+  }
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+    <div className="flex flex-col min-h-screen">
+      <header className="px-4 lg:px-6 h-16 flex items-center bg-background text-foreground fixed w-full z-10">
+        <Link className="flex items-center justify-center" href="#">
+          <FileCode className="h-6 w-6" />
+          <span className="ml-2 text-lg font-bold">PythonForAll</span>
+        </Link>
+        <nav className="ml-auto flex gap-4 sm:gap-6">
+          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#">
+            Home
+          </Link>
+          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#">
+            Modules
+          </Link>
+          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#">
+            Student Corner
+          </Link>
+          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#">
+            About
+          </Link>
+        </nav>
+        <Button variant="ghost" size="icon" className="ml-4" onClick={toggleTheme}>
+          {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+        </Button>
+      </header>
+      <main className="flex-1 pt-16">
+        <DynamicVideoHero />
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-background text-foreground">
+          <div className="container px-4 md:px-6 mx-auto">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-12">Why PythonForAll?</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <Card className="bg-card text-card-foreground">
+                <CardHeader>
+                  <BookOpen className="w-8 h-8 mb-2" />
+                  <CardTitle>Comprehensive Learning</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p>From basics to advanced topics, we cover everything you need to become a Python expert.</p>
+                </CardContent>
+              </Card>
+              <Card className="bg-card text-card-foreground">
+                <CardHeader>
+                  <Layers className="w-8 h-8 mb-2" />
+                  <CardTitle>Explore Modules</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p>Dive deep into Python&aposs powerful modules and libraries to extend your programming capabilities.</p>
+                </CardContent>
+              </Card>
+              <Card className="bg-card text-card-foreground">
+                <CardHeader>
+                  <Code className="w-8 h-8 mb-2" />
+                  <CardTitle>Hands-on Projects</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p>Apply your knowledge with real-world projects and build your portfolio.</p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-background text-foreground">
+          <div className="container px-4 md:px-6 mx-auto">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-12">Popular Python Modules</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {["NumPy", "Pandas", "Matplotlib", "TensorFlow", "Django", "Flask"].map((module) => (
+                <Card key={module} className="bg-card text-card-foreground">
+                  <CardHeader>
+                    <CardTitle>{module}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p>Learn how to use {module} in your Python projects.</p>
+                    <Button className="mt-4 bg-primary text-primary-foreground hover:bg-primary/90">
+                      Explore {module}
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
+          <div className="container px-4 md:px-6 mx-auto">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-12">Student Corner</h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <Card className="bg-card text-card-foreground">
+                <CardHeader>
+                  <CardTitle>Premade Projects</CardTitle>
+                  <CardDescription>Ready-to-use Python projects for learning and inspiration</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="list-disc pl-4 space-y-2">
+                    <li>Web Scraper</li>
+                    <li>Todo List Application</li>
+                    <li>Weather Forecast Tool</li>
+                    <li>Simple Game Development</li>
+                  </ul>
+                  <Button className="mt-4 bg-primary text-primary-foreground hover:bg-primary/90">View All Projects</Button>
+                </CardContent>
+              </Card>
+              <Card className="bg-card text-card-foreground">
+                <CardHeader>
+                  <CardTitle>Practice Programs</CardTitle>
+                  <CardDescription>Enhance your skills with these Python programs</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="list-disc pl-4 space-y-2">
+                    <li>Data Structures Implementation</li>
+                    <li>Algorithm Challenges</li>
+                    <li>File Handling Exercises</li>
+                    <li>Object-Oriented Programming Tasks</li>
+                  </ul>
+                  <Button className="mt-4 bg-primary text-primary-foreground hover:bg-primary/90">Start Practicing</Button>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
+        <p className="text-xs text-muted-foreground">© 2023 PythonForAll. All rights reserved.</p>
+        <nav className="sm:ml-auto flex gap-4 sm:gap-6">
+          <Link className="text-xs hover:underline underline-offset-4" href="#">
+            Terms of Service
+          </Link>
+          <Link className="text-xs hover:underline underline-offset-4" href="#">
+            Privacy
+          </Link>
+        </nav>
       </footer>
     </div>
-  );
+  )
 }
