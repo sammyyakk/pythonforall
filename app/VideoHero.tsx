@@ -23,9 +23,11 @@ export default function VideoHero() {
             Learn Python programming from scratch, explore its powerful modules, and build amazing projects.
           </p>
           <div className="space-x-4">
+          <a href="/yolo">
             <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
               Get Started
             </Button>
+          </a>
             <Button size="lg" variant="outline" className="bg-white/10 text-white border-white hover:bg-white/20">
               Learn More
             </Button>
