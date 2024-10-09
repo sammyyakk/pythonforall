@@ -46,7 +46,7 @@ export default function Page() {
                   <CardTitle>Explore Modules</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p>Dive deep into Python's powerful modules and libraries to extend your programming capabilities.</p>
+                  <p>Dive deep into Python&aposs powerful modules and libraries to extend your programming capabilities.</p>
                 </CardContent>
               </Card>
               <Card className="bg-card text-card-foreground">
