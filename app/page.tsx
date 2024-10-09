@@ -29,7 +29,7 @@ export default function Page() {
         <title>Welcome to PythonForAll</title>
       </header>
       <Navbar />
-      <main className="flex-1 pt-16">
+      <main className="flex-1">
         <DynamicVideoHero />
         <section className="w-full py-12 md:py-24 lg:py-32 bg-background text-foreground">
           <div className="container px-4 md:px-6 mx-auto">
