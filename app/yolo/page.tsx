@@ -1,17 +1,15 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { useTheme } from "next-themes"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Moon, Sun, FileCode } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
+import Navbar from "@/components/Navbar"
+import Sidebar from "@/components/Sidebar"
+import Footer from "@/components/Footer"
 
 export default function Page() {
-  const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const [activeSection, setActiveSection] = useState("")
-  const sectionRefs = useRef<Record<string, HTMLElement | null>>({}) // Updated typing here
+  const sectionRefs = useRef<Record<string, HTMLElement | null>>({})
 
   useEffect(() => {
     setMounted(true)
@@ -41,10 +39,6 @@ export default function Page() {
 
   if (!mounted) return null
 
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark")
-  }
-
   const sections = [
     { id: "overview", title: "Overview of YOLO" },
     { id: "features", title: "Key Features of YOLOv8" },
@@ -64,62 +58,13 @@ export default function Page() {
       window.scrollTo({ top: offsetTop, behavior: "smooth" });
     }
   }
-  
 
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center">
-          <Link className="flex items-center justify-center" href="/">
-            <FileCode className="h-6 w-6" />
-            <span className="ml-2 text-lg font-bold">PythonForAll</span>
-          </Link>
-          <nav className="ml-auto flex gap-4 sm:gap-6">
-            <Link className="text-sm font-medium hover:underline underline-offset-4" href="#">
-              Home
-            </Link>
-            <Link className="text-sm font-medium hover:underline underline-offset-4" href="#">
-              Modules
-            </Link>
-            <Link className="text-sm font-medium hover:underline underline-offset-4" href="#">
-              Student Corner
-            </Link>
-            <Link className="text-sm font-medium hover:underline underline-offset-4" href="#">
-              About
-            </Link>
-          </nav>
-          <Button variant="ghost" size="icon" className="ml-4" onClick={toggleTheme}>
-            {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-          </Button>
-        </div>
-      </header>
+      <Navbar />
       <div className="flex-1 container mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row gap-6 py-8">
-          <aside className="md:w-64 flex-shrink-0">
-            <nav className="sticky top-24">
-              <AnimatePresence>
-                {sections.map((section) => (
-                  <motion.div
-                    key={section.id}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Button
-                      variant="ghost"
-                      className={`w-full justify-start ${
-                        activeSection === section.id ? "bg-primary/10 text-primary" : ""
-                      }`}
-                      onClick={() => scrollToSection(section.id)}
-                    >
-                      {section.title}
-                    </Button>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            </nav>
-          </aside>
+          <Sidebar sections={sections} activeSection={activeSection} scrollToSection={scrollToSection} />
           <main className="flex-1">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -203,10 +148,7 @@ export default function Page() {
                           For those preferring Python, here&apos;s an example:
                         </p>
                         <pre className="bg-secondary/10 p-4 rounded-lg overflow-x-auto">
-                          <code>{`from ultralytics import YOLO
-model = YOLO('yolov8n.pt')
-results = model("https://ultralytics.com/images/bus.jpg")
-results.show()`}</code>
+                          <code>{`from ultralytics import YOLO\nmodel = YOLO('yolov8n.pt')\nresults = model("https://ultralytics.com/images/bus.jpg")\nresults.show()`}</code>
                         </pre>
                       </>
                     )}
@@ -239,11 +181,11 @@ results.show()`}</code>
                   </div>
                 </section>
               ))}
-
             </motion.div>
           </main>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

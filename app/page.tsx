@@ -1,18 +1,17 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useTheme } from "next-themes"
 import dynamic from 'next/dynamic'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { BookOpen, Code, FileCode, Layers, Moon, Sun } from "lucide-react"
-import Link from "next/link"
+import { BookOpen, Code, Layers } from "lucide-react"
+import Navbar from "@/components/Navbar"
+import Footer from "@/components/Footer"
 
 // Dynamically import the video component with no SSR
 const DynamicVideoHero = dynamic(() => import('./VideoHero'), { ssr: false })
 
 export default function Page() {
-  const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -23,35 +22,9 @@ export default function Page() {
     return null
   }
 
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark")
-  }
-
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="px-4 lg:px-6 h-16 flex items-center bg-background text-foreground fixed w-full z-10">
-        <Link className="flex items-center justify-center" href="#">
-          <FileCode className="h-6 w-6" />
-          <span className="ml-2 text-lg font-bold">PythonForAll</span>
-        </Link>
-        <nav className="ml-auto flex gap-4 sm:gap-6">
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#">
-            Home
-          </Link>
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#">
-            Modules
-          </Link>
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#">
-            Student Corner
-          </Link>
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#">
-            About
-          </Link>
-        </nav>
-        <Button variant="ghost" size="icon" className="ml-4" onClick={toggleTheme}>
-          {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-        </Button>
-      </header>
+      <Navbar />
       <main className="flex-1 pt-16">
         <DynamicVideoHero />
         <section className="w-full py-12 md:py-24 lg:py-32 bg-background text-foreground">
@@ -73,7 +46,7 @@ export default function Page() {
                   <CardTitle>Explore Modules</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p>Dive deep into Python&aposs powerful modules and libraries to extend your programming capabilities.</p>
+                  <p>Dive deep into Python's powerful modules and libraries to extend your programming capabilities.</p>
                 </CardContent>
               </Card>
               <Card className="bg-card text-card-foreground">
@@ -146,17 +119,7 @@ export default function Page() {
           </div>
         </section>
       </main>
-      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
-        <p className="text-xs text-muted-foreground">© 2024 PythonForAll. All rights reserved.</p>
-        <nav className="sm:ml-auto flex gap-4 sm:gap-6">
-          <Link className="text-xs hover:underline underline-offset-4" href="#">
-            Terms of Service
-          </Link>
-          <Link className="text-xs hover:underline underline-offset-4" href="#">
-            Privacy
-          </Link>
-        </nav>
-      </footer>
+      <Footer />
     </div>
   )
 }
