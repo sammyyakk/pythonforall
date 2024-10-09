@@ -5,7 +5,6 @@ import dynamic from 'next/dynamic'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { BookOpen, Code, Layers } from "lucide-react"
-import Head from "next/head"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 
