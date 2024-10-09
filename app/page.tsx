@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { BookOpen, Code, Layers } from "lucide-react"
+import Head from "next/head"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 
@@ -24,6 +25,9 @@ export default function Page() {
 
   return (
     <div className="flex flex-col min-h-screen">
+      <header>
+        <title>Welcome to PythonForAll</title>
+      </header>
       <Navbar />
       <main className="flex-1 pt-16">
         <DynamicVideoHero />
@@ -46,7 +50,7 @@ export default function Page() {
                   <CardTitle>Explore Modules</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p>Dive deep into Python&aposs powerful modules and libraries to extend your programming capabilities.</p>
+                  <p>Dive deep into Python&apos;s powerful modules and libraries to extend your programming capabilities.</p>
                 </CardContent>
               </Card>
               <Card className="bg-card text-card-foreground">
