@@ -58,16 +58,16 @@ export default function Sidebar({ sections, activeSection, scrollToSection }: Si
 
   return (
     <>
-    {isMobile && (
-      <Button
-        variant="outline"
-        size="icon"
-        className="fixed top-[70px] left-[11px] z-50 md:hidden"
-        onClick={toggleSidebar}
-      >
-        {isOpen ? <X size={24} /> : <Menu size={24} />}
-      </Button>
-    )}
+      {isMobile && (
+        <Button
+          variant="outline"
+          size="icon"
+          className="fixed top-[70px] left-[11px] z-50 md:hidden"
+          onClick={toggleSidebar}
+        >
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
+        </Button>
+      )}
 
       <aside
         className={`
@@ -85,7 +85,7 @@ export default function Sidebar({ sections, activeSection, scrollToSection }: Si
           top: '4rem',
         }}
       >
-        <nav className={`h-full ${isMobile ? 'p-4' : 'pr-4'}`}>
+        <nav className={`h-full ${isMobile ? 'p-4' : 'p-4'}`}>
           <div ref={contentRef}>
             <AnimatePresence>
               {sections.map((section) => (
@@ -98,14 +98,14 @@ export default function Sidebar({ sections, activeSection, scrollToSection }: Si
                 >
                   <Button
                     variant="ghost"
-                    className={`w-full justify-start ${
+                    className={`w-full justify-start text-base ${
                       activeSection === section.id ? "bg-primary/10 text-primary" : ""
                     }`}
                     onClick={() => {
                       scrollToSection(section.id);
                       if (isMobile) setIsOpen(false);
                     }}
-                 >
+                  >
                     {section.title}
                   </Button>
                   {section.subtopics && (
