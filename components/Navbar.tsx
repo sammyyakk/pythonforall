@@ -15,7 +15,7 @@ export default function Navbar() {
   }
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-[100] w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between md:justify-start">
         <Link className="flex items-center justify-center" href="/">
           <FileCode className="h-6 w-6" />
@@ -27,7 +27,7 @@ export default function Navbar() {
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => setIsOpen(!isOpen)} // Toggle isOpen state
+            onClick={() => setIsOpen(!isOpen)}
             className={`transition-transform duration-300 ${
               isOpen ? "rotate-45" : ""
             }`}
@@ -55,13 +55,13 @@ export default function Navbar() {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="fixed inset-0 z-30">
+          <div className="fixed inset-0 z-[110]">
             <div
               className="absolute inset-0 bg-black opacity-50"
               onClick={() => setIsOpen(false)}
             ></div>
             <div
-              className={`fixed top-16 left-0 w-3/4 h-screen bg-background p-4 md:hidden transition-transform duration-300 transform ${
+              className={`fixed top-16 left-0 w-3/4 h-[calc(100vh-4rem)] bg-background p-4 md:hidden transition-transform duration-300 transform ${
                 isOpen ? "translate-x-0" : "-translate-x-full"
               }`}
             >
@@ -92,8 +92,7 @@ export default function Navbar() {
                   href="/about"
                   onClick={() => setIsOpen(false)}
                 >
-                  About
-                </Link>
+                  About </Link>
               </nav>
             </div>
           </div>
