@@ -28,7 +28,7 @@ export default function VideoHero() {
               Get Started
             </Button>
           </a>
-            <Button size="lg" variant="outline" className="bg-white/10 text-white border-white hover:bg-white/20">
+            <Button size="lg" variant="outline" className="bg-yellow-500 text-white border-yellow-500 hover:bg-yellow-500/90">
               Learn More
             </Button>
           </div>
