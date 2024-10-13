@@ -4,7 +4,8 @@ import { useState } from "react"
 import { useTheme } from "next-themes"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { FileCode, Moon, Sun, Menu } from "lucide-react"
+import { Moon, Sun, Menu } from "lucide-react"
+import Image from "next/image"
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme()
@@ -18,7 +19,7 @@ export default function Navbar() {
     <header className="sticky top-0 z-[100] w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between md:justify-start">
         <Link className="flex items-center justify-center" href="/">
-          <img src="./pfa_logo.ico" className="h-9 w-9" />
+          <Image src="./pfa_logo.ico" className="h-9 w-9" alt="Logo"/>
           <span className="ml-0.5 text-lg font-bold">PythonForAll</span>
         </Link>
 
