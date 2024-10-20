@@ -13,14 +13,13 @@ const DecapCMS = dynamic(
 
 export default function AdminPage() {
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      // Load Netlify Identity script
-      const script = document.createElement('script');
-      script.src = "https://identity.netlify.com/v1/netlify-identity-widget.js";
-      script.async = true;
-      document.body.appendChild(script);
-    }
+    (async () => {
+      if (process.env.NODE_ENV === 'development') {
+        const CMS = (await import('decap-cms-app')).default;
+        CMS.init();
+      }
+    })();
   }, []);
 
-  return <DecapCMS />;
+  return <div id="nc-root" />;
 }
