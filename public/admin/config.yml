@@ -1,0 +1,16 @@
+backend:
+  name: git-gateway
+  branch: main # or the branch you use
+
+media_folder: "public/uploads" # Where uploaded media files will be stored
+public_folder: "/uploads" # Media files URL path
+
+collections:
+  - name: "test3"
+    label: "Test 3 Page"
+    folder: "content/test3"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }
